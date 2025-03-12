@@ -29,9 +29,9 @@ class DB
 
     public function getLastImage()
     {
-        $query = "SELECT * FROM images ORDER BY id DESC LIMIT 1";
+        $query = "SELECT * FROM images";
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
-        return $stmt->fetch();
+        return $stmt->fetchAll();
     }
 }

@@ -37,7 +37,11 @@
 
                         if (move_uploaded_file($file_tmp, $file_path)) { // From where to where.
                             if ($db->saveImageAddress($file_path)) {
-                                echo "file successfully uploaded";
+                                $file_path = $db->getLastImage();
+                                foreach ($file_path as $value) {
+                                    $image_url = $_ENV['APP_URL'] . $value['path'];
+                                    echo "<img src='$image_url' alt='Yuklangan rasm' style='max-width:300px; display:block; margin-top:10px;'>";
+                                }
                             }
                         }
                     }
