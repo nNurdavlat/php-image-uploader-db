@@ -13,7 +13,9 @@
         <button type="submit">Submit</button>
     </form>
     <?php
-        var_dump($_FILES);  // See what is coming to us.
+        require "DB.php";
+        $db = new DB();
+        // var_dump($_FILES);  // See what is coming to us.
         if (isset($_FILES['image'])) {  // Check if the image is received.
             $file = $_FILES['image'];
             $file_name = $file['name'];
@@ -34,7 +36,9 @@
                         $file_path = 'uploads/' . $file_name_new;
 
                         if (move_uploaded_file($file_tmp, $file_path)) { // From where to where.
-                            echo "file successfully uploaded";
+                            if ($db->saveImageAddress($file_path)) {
+                                echo "file successfully uploaded";
+                            }
                         }
                     }
                 }
